@@ -15,7 +15,7 @@ if menu == "Registro":
     zona = st.selectbox("Zona", ["Surquillo Viejo", "Edificios Nuevos"])
     tema = st.selectbox("Tema", ["Seguridad", "Empleo", "Salud", "Educación"])
     apoyo = st.slider("Nivel de apoyo", 1, 5)
-    telefono = st.text_imput("Telefono")
+    telefono = st.text_input("Telefono")
     permiso = st.selectbox("¿Acepta ser contactado?", ["Si", "No"])
     observaciones = st.text_area ("Observaciones")
 

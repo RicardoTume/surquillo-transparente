@@ -6,7 +6,7 @@ st.set_page_config(page_title="Surquillo Transparente")
 st.title("Surquillo Transparente")
 st.write("Participación y transparencia en un clic")
 
-menu = st.sidebar.selectbox("Menú", ["Registro", "Agenda", "Transparencia"])
+menu = st.sidebar.selectbox("Menú", ["Registro", "Agenda", "Transparencia", "Panel"])
 
 if menu == "Registro":
     st.header("Registro ciudadano")
@@ -15,10 +15,13 @@ if menu == "Registro":
     zona = st.selectbox("Zona", ["Surquillo Viejo", "Edificios Nuevos"])
     tema = st.selectbox("Tema", ["Seguridad", "Empleo", "Salud", "Educación"])
     apoyo = st.slider("Nivel de apoyo", 1, 5)
+    telefono = st.text_imput("Telefono")
+    permiso = st.selectbox("¿Acepta ser contactado?", ["Si", "No"])
+    observaciones = st.text_area ("Observaciones")
 
     if st.button("Guardar"):
-        nuevo = pd.DataFrame([[nombre, zona, tema, apoyo]],
-                             columns=["Nombre", "Zona", "Tema", "Apoyo"])
+        nuevo = pd.DataFrame([[nombre, telefono, zona, tema, apoyo, permiso, observaciones]],
+                             columns=["Nombre", "Telefono", "Zona", "Tema", "Apoyo", "Permiso", "Observaciones"])
         try:
             df = pd.read_excel("base_surquillo.xlsx")
             df = pd.concat([df, nuevo], ignore_index=True)
@@ -43,3 +46,21 @@ elif menu == "Transparencia":
 
     df = pd.DataFrame(data)
     st.table(df)
+
+elif menu == "Panel":
+    st.header("Resumen político")
+
+    try:
+        df = pd.read_excel("base_surquillo.xlsx")
+
+        st.write("Total registrados:", len(df))
+        st.write("Apoyo promedio:", round(df["Apoyo"].mean(), 2))
+
+        st.subheader("Apoyo por zona")
+        st.bar_chart(df.groupby("Zona")["Apoyo"].mean())
+
+        st.subheader("Temas principales")
+        st.bar_chart(df["Tema"].value_counts())
+
+    except:
+        st.warning("Aún no hay datos")

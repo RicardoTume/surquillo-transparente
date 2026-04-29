@@ -14,7 +14,7 @@ if menu == "Registro":
     nombre = st.text_input("Nombre")
     departamento = st.selectbox("Departamento", [
         "Lima", "Arequipa", "Cusco", "Piura", "La Libertad", "Otros"])
-    distrito = st.text_imput("Distrito")
+    distrito = st.text_input("Distrito")
     tema = st.selectbox("Tema", ["Seguridad", "Empleo", "Salud", "Educación", "Orden", "Limpieza", "Iluminación", "Agua"])
     opcion = st.selectbox(
         "¿Qué tan dispuesto estás a participar con nosotros?",

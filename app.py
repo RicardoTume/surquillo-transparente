@@ -5,16 +5,18 @@ st.set_page_config(page_title="Perú Digital")
 
 st.title("Perú Digital")
 st.caption("Hacemos política digital: escuchar, organizar y decidir con datos")
-
+st.info("Esta plataforma recoge información ciudadana para tomar decisiones basadas en evidencia, no en intuición.")
 menu = st.sidebar.selectbox("Menú", ["Registro", "Agenda", "Transparencia", "Panel"])
 
 if menu == "Registro":
     st.header("Registro ciudadano")
 
     nombre = st.text_input("Nombre")
-    zona = st.selectbox("Zona", ["Surquillo Viejo", "Edificios Nuevos"])
-    tema = st.selectbox("Tema", ["Seguridad", "Empleo", "Salud", "Educación"])
-    opcion _ st.selectbox(
+    departamento = st.selectbox("Departamento", [
+        "Lima", "Arequipa", "Cusco", "Piura", "La Libertad", "Otros"])
+    distrito = st.text_imput("Distrito")
+    tema = st.selectbox("Tema", ["Seguridad", "Empleo", "Salud", "Educación", "Orden", "Limpieza", "Iluminación", "Agua"])
+    opcion = st.selectbox(
         "¿Qué tan dispuesto estás a participar con nosotros?",
         st.caption("Esto nos ayuda a enviarte solo lo que te interese.")
         [
@@ -36,15 +38,15 @@ if menu == "Registro":
     observaciones = st.text_area ("Observaciones")
 
     if st.button("Guardar"):
-        nuevo = pd.DataFrame([[nombre, telefono, zona, tema, apoyo, permiso, observaciones]],
-                             columns=["Nombre", "Telefono", "Zona", "Tema", "Apoyo", "Permiso", "Observaciones"])
+        nuevo = pd.DataFrame([[nombre, telefono, departamento, distrito, tema, apoyo, permiso, observaciones]],
+                             columns=["Nombre", "Telefono", "Departamento", "Distrito", "Tema", "Apoyo", "Permiso", "Observaciones"])
         try:
-            df = pd.read_excel("base_surquillo.xlsx")
+            df = pd.read_excel("base_nacional.xlsx")
             df = pd.concat([df, nuevo], ignore_index=True)
         except:
             df = nuevo
 
-        df.to_excel("base_surquillo.xlsx", index=False)
+        df.to_excel("base_nacional.xlsx", index=False)
         st.success("Registro guardado")
 
 elif menu == "Agenda":
@@ -67,13 +69,13 @@ elif menu == "Panel":
     st.header("Resumen político")
 
     try:
-        df = pd.read_excel("base_surquillo.xlsx")
+        df = pd.read_excel("base_nacional.xlsx")
 
         st.write("Total registrados:", len(df))
         st.write("Apoyo promedio:", round(df["Apoyo"].mean(), 2))
 
         st.subheader("Apoyo por zona")
-        st.bar_chart(df.groupby("Zona")["Apoyo"].mean())
+        st.bar_chart(df.groupby("Departamento")["Apoyo"].mean())
 
         st.subheader("Temas principales")
         st.bar_chart(df["Tema"].value_counts())

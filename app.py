@@ -14,7 +14,23 @@ if menu == "Registro":
     nombre = st.text_input("Nombre")
     zona = st.selectbox("Zona", ["Surquillo Viejo", "Edificios Nuevos"])
     tema = st.selectbox("Tema", ["Seguridad", "Empleo", "Salud", "Educación"])
-    apoyo = st.slider("Nivel de apoyo", 1, 5)
+    opcion _ st.selectbox(
+        "¿Qué tan dispuesto estás a participar con nosotros?",
+        st.caption("Esto nos ayuda a enviarte solo lo que te interese.")
+        [
+            "Solo quiero informarme"
+            "Me interesa participar ocasionalmente",
+            "Me gustaría asisitr a una reunión",
+            "Quiero apoyar activamente"
+        ]
+    )
+    mapa_apoyo = {
+        "Solo quiero informarme" : 2,
+        "Me interesa participar ocasionalmente" : 3,
+        "Me gustaría asisitr a una reunión" : 4,
+        "Quiero apoyar activamente" : 5
+    }
+    apoyo = mapa_apoyo[opcion]
     telefono = st.text_input("Telefono")
     permiso = st.selectbox("¿Acepta ser contactado?", ["Si", "No"])
     observaciones = st.text_area ("Observaciones")

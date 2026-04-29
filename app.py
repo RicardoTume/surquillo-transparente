@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
 
-st.set_page_config(page_title="Surquillo Transparente")
+st.set_page_config(page_title="Perú Digital")
 
-st.title("Surquillo Transparente")
-st.write("Participación y transparencia en un clic")
+st.title("Perú Digital")
+st.caption("Hacemos política digital: escuchar, organizar y decidir con datos")
 
 menu = st.sidebar.selectbox("Menú", ["Registro", "Agenda", "Transparencia", "Panel"])
 

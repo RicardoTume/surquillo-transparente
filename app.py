@@ -18,14 +18,14 @@ if menu == "Registro":
     tema = st.selectbox("Tema", ["Seguridad", "Empleo", "Salud", "Educación", "Orden", "Limpieza", "Iluminación", "Agua"])
     opcion = st.selectbox(
         "¿Qué tan dispuesto estás a participar con nosotros?",
-        st.caption("Esto nos ayuda a enviarte solo lo que te interese.")
         [
-            "Solo quiero informarme"
+            "Solo quiero informarme",
             "Me interesa participar ocasionalmente",
             "Me gustaría asisitr a una reunión",
             "Quiero apoyar activamente"
         ]
     )
+    st.caption("Esto nos ayuda a enviarte solo lo que te interese.")
     mapa_apoyo = {
         "Solo quiero informarme" : 2,
         "Me interesa participar ocasionalmente" : 3,

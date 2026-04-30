@@ -1,0 +1,4 @@
+Plain text
+streamlit
+pandas
+openpyxl
